@@ -1,41 +1,38 @@
-CREATE DATABASE ikeo_non_normalise;
-USE ikeo_non_normalise;
+CREATE DATABASE ikeo_bad;
+USE ikeo_bad;
 
-CREATE TABLE commande_globale (
+CREATE TABLE commande_generale (
+
     id INT AUTO_INCREMENT PRIMARY KEY,
 
-    -- Informations commande
-    numero_commande VARCHAR(50),
-    date_commande DATE,
-    statut_commande VARCHAR(50),
-    montant_total DECIMAL(10,2),
+    -- Données client (répétées à chaque commande)
+    nomClient VARCHAR(50),
+    prenomClient VARCHAR(50),
+    dateNaissanceClient DATE,
+    telephoneClient VARCHAR(20),
+    mailClient VARCHAR(50),
+    adresseClient VARCHAR(255),
+    pointFidelite INT,
 
-    -- Informations client (répétées à chaque ligne)
-    nom_client VARCHAR(100),
-    prenom_client VARCHAR(100),
-    email_client VARCHAR(150),
-    telephone_client VARCHAR(20),
-    adresse_client VARCHAR(255),
-    ville_client VARCHAR(100),
-    code_postal_client VARCHAR(10),
+    -- Données employé (répétées)
+    nomEmploye VARCHAR(50),
+    prenomEmploye VARCHAR(50),
+    salaireEmploye DECIMAL(10,2),
 
-    -- Informations produit (répétées)
-    nom_produit VARCHAR(100),
-    description_produit TEXT,
-    prix_unitaire DECIMAL(10,2),
-    categorie_produit VARCHAR(100),
+    -- Données produit (répétées)
+    nomProduit VARCHAR(100),
+    rayonProduit VARCHAR(50),   -- texte au lieu d’une table
+    fournisseurProduit VARCHAR(50),
+    telephoneFournisseur VARCHAR(20),
+    prixUnitaire DECIMAL(10,2),
+    stockActuel INT,
 
-    -- Fournisseur du produit
-    nom_fournisseur VARCHAR(100),
-    telephone_fournisseur VARCHAR(20),
-    pays_fournisseur VARCHAR(100),
+    -- Données transporteur (répétées)
+    nomTransporteur VARCHAR(50),
+    telephoneTransporteur VARCHAR(20),
 
-    -- Magasin
-    nom_magasin VARCHAR(100),
-    ville_magasin VARCHAR(100),
-    responsable_magasin VARCHAR(100),
-
-    -- Détails ligne commande
+    -- Données commande
     quantite INT,
-    prix_ligne DECIMAL(10,2)
+    prixTotal DECIMAL(10,2),
+    dateCommande VARCHAR(50)  -- volontairement mauvais type
 );
